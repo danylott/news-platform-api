@@ -3,7 +3,7 @@ from django.conf.urls import include
 
 from rest_framework import routers
 
-from .views import PostViewSet, CommentViewSet
+from .views import PostViewSet, CommentViewSet, overview, task
 
 
 router = routers.DefaultRouter()
@@ -13,4 +13,6 @@ router.register('comments', CommentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('task/', task),
+    path('overview/', overview),
 ]

@@ -1,11 +1,12 @@
 from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
+from .tasks import reset_post_upvotes
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -54,3 +55,33 @@ class CommentViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         response = {'message': 'You cant create comment like that'}
         return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def overview(request):
+    api_urls = {
+        'Register reset post upvotes task': '/task/ - POST',
+        'Post list': '/posts/ - GET',
+        'Post detail': '/posts/<int:pk>/ - GET',
+        'Post create': '/posts/ - POST',
+        'Post update': '/posts/<int:pk>/ - POST',
+        'Post delete': '/posts/<int:pk>/ - DELETE',
+        'Comment list': '/comments/ - GET',
+        'Comment detail': '/comments/<int:pk>/ - GET',
+        'Comment create': '/posts/<int:pk>/comment/ - POST',
+        'Comment update': '/comments/<int:pk>/ - POST',
+        'Comment delete': '/comments/<int:pk>/ - DELETE',
+    }
+
+    return Response(api_urls)
+
+
+@api_view(['POST'])
+def task(request):
+    try:
+        reset_post_upvotes(repeat=24*60*60)
+        response = 'reset_post_upvotes task successfully registered'
+        return Response(response, status=status.HTTP_200_OK)
+    except:
+        response = 'Something went wrong with registering reset_post_upvotes task'
+        return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
