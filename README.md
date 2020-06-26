@@ -1,6 +1,9 @@
 # news-platform-api
 test project for news-platform-api
 
+# Devspace Deployment:
+- basic_url: http://my-space-c13504df.devspace.host/
+
 # Docker usage:
 - `docker-compose up`
 
