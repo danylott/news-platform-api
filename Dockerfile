@@ -1,20 +1,18 @@
-# pull official base image
-FROM python:3.8.3
+FROM python:3.8-slim-buster
 
-# set work directory
+# Create project directory (workdir)
 WORKDIR /app
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV DEBUG 0
-
-# install dependencies
-COPY ./requirements.txt .
+# Add requirements.txt to WORKDIR and install dependencies
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# copy project
-COPY . .
+# Add source code files to WORKDIR
+ADD . .
 
-# run gunicorn
-CMD gunicorn news_platform.wsgi:application --bind 0.0.0.0:$PORT
+# Application port (optional)
+EXPOSE 8000
+
+# Container start command
+# It is also possible to override this in devspace.yaml via images.*.cmd
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
