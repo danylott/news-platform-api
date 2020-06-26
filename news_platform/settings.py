@@ -25,7 +25,7 @@ SECRET_KEY = "nu-k1@1_%zji7--f6e(7s&wp#%*p=3a&xz*l6elhihapsyfz+2"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','evening-savannah-68190']
 
 
 # Application definition
