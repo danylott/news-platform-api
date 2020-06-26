@@ -1,6 +1,9 @@
 # news-platform-api
 test project for news-platform-api
 
+# Docker usage:
+- `docker-compose up`
+
 # python-Django usage:
 - `python -m venv venv`
 - `source venv/bin/activate`
@@ -17,3 +20,9 @@ I use this easier feature)
 
 # API documentation:
 - Postman collection documentation: https://documenter.getpostman.com/view/9909300/SzzrZuVT
+
+# Heroku:
+- On current moment I cant deploy on heroku - (cant fix error: modulenotfounderror: no module named 'config')
+- but everything else - works fine
+- I was trying to do it on this app: `evening-savannah-68190`, but 
+that exception raised
