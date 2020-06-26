@@ -7,12 +7,12 @@ from .views import PostViewSet, CommentViewSet, overview, task
 
 
 router = routers.DefaultRouter()
-router.register('posts', PostViewSet)
-router.register('comments', CommentViewSet)
+router.register("posts", PostViewSet)
+router.register("comments", CommentViewSet)
 
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('task/', task),
-    path('overview/', overview),
+    path("", include(router.urls)),
+    path("task/", task),
+    path("overview/", overview),
 ]
